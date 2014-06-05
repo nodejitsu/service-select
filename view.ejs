@@ -1,0 +1,55 @@
+<form action="#" class="box">
+  <header>
+    <h2><%= name %></h2>
+
+    <% if (!services.length) { %>
+    <button type="button" name="add">
+      Add <%= name.toLowerCase() %>
+    </button>
+    <% } else { %>
+    <select name="services" placeholder="Add <%= name.toLowerCase() %>">
+      <option value="">Add <%= name.toLowerCase() %></option>
+      <% services.forEach(function each(service) { %>
+      <option value="<%= service.type %>"><%= service.name %></option>
+      <% }); %>
+    </select>
+    <% } %>
+
+    <div style="clear:both">
+      <!-- 
+      Horrible hack, but needed for clearing floats without overflow as it will
+      kill the autocomplete
+      -->
+    </div>
+  </header>
+
+  <% if ('description' in locals && description) { %>
+  <p><%- description %></p>
+  <% } %>
+
+  <fieldset class="target">
+    <h3>Target name</h3>
+    <p>Target description</p>
+
+    <label>
+      name:
+      <input type="text" placeholder="name" name="name">
+    </label>
+
+    <button type="submit">
+      Do things
+    </button>
+  </fieldset>
+
+  <% active.forEach(function each(service) { %>
+  <fieldset class="added">
+    <strong><%= service.name %></strong>
+
+    <ul>
+      <li>
+        <button>Remove</button>
+      </li>
+    </ul>
+  </fieldset>
+  <% }) %>
+</form>
