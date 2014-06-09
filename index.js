@@ -10,10 +10,18 @@ Pagelet.extend({
   js:   'client.js',
 
   //
-  // Force a name
+  // Allow FORM submits to be streaming.
+  //
+  streaming: true,
+
+  //
+  // Force a name.
   //
   name: 'service-select',
 
+  //
+  // What data needs to be synced with the front-end.
+  //
   query: ['services'],
 
   //
@@ -25,6 +33,18 @@ Pagelet.extend({
     '//code.jquery.com/jquery-2.1.0.min.js',
     path.join(__dirname, '/selectize.js')
   ],
+
+  /**
+   * Respond to POST requests.
+   *
+   * @param {Object} fields The input fields.
+   * @param {Object} files Optional uploaded files.
+   * @param {Function} next Completion callback.
+   * @api public
+   */
+  post: function post(fields, files, next) {
+    this.add(fields, next);
+  },
 
   /**
    * Called when a new service has to be added.
@@ -96,6 +116,20 @@ Pagelet.extend({
       active: this.active.bind(this)
     }, function completed(err, data) {
       if (err) return done(err);
+
+      data.services = data.services || [];
+      data.active = data.active || [];
+
+      ['services', 'active'].forEach(function transform(key) {
+        if (Array.isArray(data[key])) return;
+
+        data[key] = Object.keys(data[key]).map(function map(name) {
+          var thing = data[key][name];
+          thing.name = thing.name || name;
+
+          return thing;
+        });
+      });
 
       data.description = pagelet.description;
       data.name = pagelet.name.replace('-', ' ');
