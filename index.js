@@ -24,6 +24,13 @@ Pagelet.extend({
   //
   query: ['services'],
 
+  pagelets: {
+    target: Pagelet.extend({
+      view: 'target.ejs',
+      streaming: true
+    }).on(module)
+  },
+
   //
   // External dependencies that should be included on the page using a regular
   // script tag. This dependency is needed for the `package.js` client file.

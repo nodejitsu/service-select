@@ -1,0 +1,18 @@
+<% if ('name' in locals) { %>
+<h3><%= name %></h3>
+<% } %>
+
+<% if ('description' in locals) { %>
+<p><%= description %></p>
+<% } %>
+
+<% if ('fields' in locals) fields.forEach(function (field) { %>
+<label>
+  <%= field %>:
+  <input type="text" placeholder="<%= field %>" name="<%= field %>" required>
+</label>
+<% }); %>
+
+<button type="submit">
+  Do things
+</button>

@@ -27,19 +27,7 @@
   <p><%- description %></p>
   <% } %>
 
-  <fieldset class="target">
-    <h3>Target name</h3>
-    <p>Target description</p>
-
-    <label>
-      name:
-      <input type="text" placeholder="name" name="name">
-    </label>
-
-    <button type="submit">
-      Do things
-    </button>
-  </fieldset>
+  <fieldset class="target" data-pagelet="target"></fieldset>
 
   <% active.forEach(function each(service) { %>
   <fieldset class="added">
