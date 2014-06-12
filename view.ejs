@@ -10,7 +10,7 @@
     <select name="services" placeholder="Add <%= name.toLowerCase() %>">
       <option value="">Add <%= name.toLowerCase() %></option>
       <% services.forEach(function each(service) { %>
-      <option value="<%= service.type %>"><%= service.name %></option>
+      <option value="<%= service.type || service.name %>"><%= service.name %></option>
       <% }); %>
     </select>
     <% } %>
@@ -29,9 +29,15 @@
 
   <fieldset class="target" data-pagelet="target"></fieldset>
 
-  <% active.forEach(function each(service) { %>
+  <% active.forEach(function each(service) { console.log(service); %>
   <fieldset class="added">
-    <strong><%= service.name %></strong>
+    <strong>
+      <%= service.name %>
+
+      <% if (service.type) { %>
+      <small><%= service.type %></small>
+      <% } %>
+    </strong>
 
     <ul>
       <li>

@@ -1,4 +1,10 @@
-pipe.once('notifications:render', function notifications(pagelet) {
+/**
+ * Create a new auto complete.
+ *
+ * @param {Pagelet} pagelet
+ * @api private
+ */
+function autocomplete(pagelet) {
   'use strict';
 
   var container = $(pagelet.placeholders);
@@ -7,10 +13,21 @@ pipe.once('notifications:render', function notifications(pagelet) {
   // Add support for adding new services
   //
   container.find('header select').selectize({
-    create: true
+    create: false,
+    onItemAdd: function added(item) {
+      var target = pagelet.pipe.get('target')
+        , data;
+
+      pagelet.data.services.some(function some(service) {
+        if (item === service.name) data = service;
+        return !!data;
+      });
+
+      $(target.placeholders).show();
+      target.render(data);
+    }
   });
-});
+}
 
-pipe.once('targets:render', function targets(pagelet) {
-
-});
+pipe.on('notifications:render', autocomplete)
+    .on('targets:render', autocomplete);

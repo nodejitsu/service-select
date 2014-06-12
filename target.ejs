@@ -9,7 +9,20 @@
 <% if ('fields' in locals) fields.forEach(function (field) { %>
 <label>
   <%= field %>:
-  <input type="text" placeholder="<%= field %>" name="<%= field %>" required>
+  <input type="text" placeholder="<%= field %>" name="<%= field.toLowerCase() %>" required>
+</label>
+<% }); %>
+
+<% if ('selects' in locals) selects.forEach(function (select) { %>
+<label>
+  <%= select.name %>
+  <select name="<%= select.name.toLowerCase() %>">
+    <% if (select.options) select.options.forEach(function (option) { %>
+    <option value="<%= option.value || option.name %>">
+      <%= option.name %>
+    </option>
+    <% }); %>
+  </select>
 </label>
 <% }); %>
 
