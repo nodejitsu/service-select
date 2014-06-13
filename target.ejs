@@ -6,14 +6,14 @@
 <p><%= description %></p>
 <% } %>
 
-<% if ('fields' in locals) fields.forEach(function (field) { %>
+<% if ('fields' in locals) { fields.forEach(function (field) { %>
 <label>
   <%= field %>:
   <input type="text" placeholder="<%= field %>" name="<%= field.toLowerCase() %>" required>
 </label>
-<% }); %>
+<% }); } %>
 
-<% if ('selects' in locals) selects.forEach(function (select) { %>
+<% if ('selects' in locals) { selects.forEach(function (select) { %>
 <label>
   <%= select.name %>
   <select name="<%= select.name.toLowerCase() %>">
@@ -24,7 +24,7 @@
     <% }); %>
   </select>
 </label>
-<% }); %>
+<% }); } %>
 
 <button type="submit">
   Do things

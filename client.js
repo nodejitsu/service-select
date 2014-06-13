@@ -23,8 +23,8 @@ function autocomplete(pagelet) {
         return !!data;
       });
 
-      $(target.placeholders).show();
       target.render(data);
+      $(target.placeholders).show();
     }
   });
 }
