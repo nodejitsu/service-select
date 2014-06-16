@@ -15,7 +15,7 @@ function autocomplete(pagelet) {
   container.find('header select').selectize({
     create: false,
     onItemAdd: function added(item) {
-      var target = pagelet.pipe.get('target')
+      var target = pagelet.pagelet('target')
         , data;
 
       pagelet.data.services.some(function some(service) {

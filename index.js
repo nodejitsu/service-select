@@ -50,7 +50,13 @@ Pagelet.extend({
    * @api public
    */
   post: function post(fields, files, next) {
-    this.add(fields, next);
+    if ('delete' in fields) {
+      this.remove(fields, next);
+    } else if ('add' in fields) {
+      this.add(fields, next);
+    }
+
+    return next(new Error('Invalid form data'));
   },
 
   /**
