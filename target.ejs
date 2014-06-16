@@ -26,4 +26,16 @@
 </label>
 <% }); } %>
 
+<% if (!('fields' in locals || 'selects' in locals)) { %>
+<label>
+  Module name:
+  <input type="text" name="package" placeholder="package name" />
+</label>
+<% } %>
+
+
+<% if ('name' in locals) { %>
 <button type="submit" name="add" value="<%= name %>">Add</button>
+<% } else { %>
+<button type="submit" name="add" value="subscribe">Subscribe</button>
+<% } %>

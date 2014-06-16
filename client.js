@@ -29,5 +29,35 @@ function autocomplete(pagelet) {
   });
 }
 
+pipe.on('notifications:target:render', function (pagelet) {
+  'use strict';
+
+  var notifications = pagelet.pipe.get('notifications');
+
+  $('input[name="package"]', pagelet.placeholders).selectize({
+    valueField: 'name',
+    labelField: 'name',
+    searchField: 'name',
+    maxOptions: 5,          // Maximum items in the dropdown.
+    openOnFocus: false,     // Open dropdown on focus.
+    createOnBlur: true,     // Blur input, create item.
+    maxItems: 1,            // Only allow one module.
+    create: true,
+    load: function load(query, callback) {
+      if (!query.length) return callback();
+
+      notifications.autocomplete(query, function autocomplete(err, results) {
+        if (err) return callback();
+        callback(results);
+      });
+    },
+    render: {
+      option_create: function create(data, escape) {
+        return '';
+      }
+    }
+  });
+});
+
 pipe.on('notifications:render', autocomplete)
     .on('targets:render', autocomplete);
