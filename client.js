@@ -7,7 +7,8 @@
 function autocomplete(pagelet) {
   'use strict';
 
-  var container = $(pagelet.placeholders);
+  var container = $(pagelet.placeholders)
+    , target = pagelet.pagelet('target');
 
   //
   // Add support for adding new services
@@ -15,8 +16,7 @@ function autocomplete(pagelet) {
   container.find('header select').selectize({
     create: false,
     onItemAdd: function added(item) {
-      var target = pagelet.pagelet('target')
-        , data;
+      var data;
 
       pagelet.data.services.some(function some(service) {
         if (item === service.name) data = service;
@@ -26,6 +26,14 @@ function autocomplete(pagelet) {
       target.render(data);
       $(target.placeholders).show();
     }
+  });
+
+  //
+  // Hide form fields when canceled.
+  //
+  container.on('click', 'button[name="cancel"]', function click() {
+    target.render('');
+    $(target.placeholders).hide();
   });
 }
 
