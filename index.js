@@ -54,9 +54,9 @@ Pagelet.extend({
       this.remove(fields, next);
     } else if ('add' in fields) {
       this.add(fields, next);
+    } else {
+      next(new Error('Invalid form data'));
     }
-
-    return next(new Error('Invalid form data'));
   },
 
   /**
