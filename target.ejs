@@ -8,8 +8,9 @@
 
 <% if ('fields' in locals) { fields.forEach(function (field) { %>
 <label>
-  <%= field %>:
-  <input type="text" placeholder="<%= field %>" name="<%= field.toLowerCase() %>" required>
+  <%= field.name %>:
+  <% if (field.description) { %><small><%= field.description %></small><% } %>
+  <input type="<%= field.type || 'text' %>" placeholder="<%= field.placeholder || field.name %>" name="<%= field.name.toLowerCase() %>" required>
 </label>
 <% }); } %>
 
