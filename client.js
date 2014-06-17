@@ -14,7 +14,8 @@ function autocomplete(pagelet) {
   // Add support for adding new services
   //
   container.find('header select').selectize({
-    create: false,
+    create: false,          // Do not allow creation of new values.
+    maxOptions: 15,         // Maximum items in the dropdown.
     onItemAdd: function added(item) {
       var data;
 
