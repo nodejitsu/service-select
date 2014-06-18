@@ -3,14 +3,14 @@
 <% } %>
 
 <% if ('description' in locals) { %>
-<p><%= description %></p>
+<p><%- description.replace(/\&quot;/g, '"').replace(/\&gt;/g, '>').replace(/\&lt;/g, '<') %></p>
 <% } %>
 
 <% if ('fields' in locals) { fields.forEach(function (field) { %>
 <label>
   <%= field.name %>:
   <% if (field.description) { %><small><%= field.description %></small><% } %>
-  <input type="<%= field.type || 'text' %>" placeholder="<%= field.placeholder || field.name %>" name="<%= field.name.toLowerCase() %>" required>
+  <input type="<%= field.type || 'text' %>" placeholder="<%= field.placeholder || field.name %>" name="<%= field.name.toLowerCase() %>" <% if (field.required !== false) { %>required<% } %>>
 </label>
 <% }); } %>
 
