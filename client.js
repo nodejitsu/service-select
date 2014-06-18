@@ -13,7 +13,7 @@ function autocomplete(pagelet) {
   //
   // Add support for adding new services
   //
-  container.find('header select').selectize({
+  var select = container.find('header select').selectize({
     create: false,          // Do not allow creation of new values.
     maxOptions: 15,         // Maximum items in the dropdown.
     onItemAdd: function added(item) {
@@ -27,14 +27,15 @@ function autocomplete(pagelet) {
       target.render(data);
       $(target.placeholders).show();
     }
-  });
+  })[0].selectize;
 
   //
   // Hide form fields when canceled.
   //
   container.on('click', 'button[name="cancel"]', function click() {
-    target.render('');
-    $(target.placeholders).hide();
+    select.clear();                   // Reset the auto select/dropdown.
+    target.render('');                // Nuke the HTML
+    $(target.placeholders).hide();    // Hide the parent element.
   });
 }
 
