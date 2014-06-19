@@ -2,11 +2,7 @@
   <header>
     <h2><%= name %></h2>
 
-    <% if (!services.length) { %>
-    <button type="button" name="add">
-      Add <%= name.toLowerCase() %>
-    </button>
-    <% } else { %>
+    <% if (services.length) { %>
     <select name="services" placeholder="Add <%= name.toLowerCase() %>">
       <option value="">Add <%= name.toLowerCase() %></option>
       <% services.forEach(function each(service) { %>
