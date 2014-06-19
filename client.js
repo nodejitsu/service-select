@@ -47,6 +47,11 @@ pipe.on('notifications:target:render', function (pagelet) {
 
   var notifications = pagelet.pipe.get('notifications');
 
+  //
+  // We're not extended with an autocomplete, bail out.
+  //
+  if (!('autocomplete' in notifications)) return;
+
   $('input[name="package"]', pagelet.placeholders).selectize({
     valueField: 'name',
     labelField: 'name',
