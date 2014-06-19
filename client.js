@@ -27,13 +27,16 @@ function autocomplete(pagelet) {
       target.render(data);
       $(target.placeholders).show();
     }
-  })[0].selectize;
+  })[0];
 
   //
   // Hide form fields when canceled.
   //
   container.on('click', 'button[name="cancel"]', function click() {
-    select.clear();                   // Reset the auto select/dropdown.
+    if (select) {
+      select.selectize.clear();       // Reset the auto select/dropdown.
+    }
+
     target.render('');                // Nuke the HTML
     $(target.placeholders).hide();    // Hide the parent element.
   });
