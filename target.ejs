@@ -1,5 +1,5 @@
 <% if ('name' in locals) { %>
-<h3><%= name %></h3>
+<h3><%= name.slice(0, 1).toUpperCase() + name.slice(1) %></h3>
 <% } %>
 
 <% if ('description' in locals) { %>
