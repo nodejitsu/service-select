@@ -140,6 +140,21 @@
     });
   });
 
+  /**
+   * Hacky as fuck but works like charm. When the targets are updated, update
+   * the notifcations.
+   *
+   * @api private
+   */
+  function submission(pagelet) {
+    pagelet.once('render', function loading() {
+      pagelet.once('render', function update() {
+        pipe.get('notifications').get();
+      });
+    });
+  }
+
   pipe.on('notifications:render', autocomplete)
+      .on('targets:submit', submission)
       .on('targets:render', autocomplete);
 }());
