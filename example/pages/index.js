@@ -10,7 +10,7 @@ Page.extend({
       description: 'ill create my own service, with blackjack and hookers.',
       add: function (data, next) { next(); },
       services: function (next) { next(undefined, [{ name: 'foo' }]); },
-      active: function (next) { next(undefined, [{ name: 'foo' }, { name: 'bar'}]); },
+      added: function (next) { next(undefined, [{ name: 'foo' }, { name: 'bar'}]); },
       name: 'notifications'
     })
   }

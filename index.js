@@ -102,14 +102,14 @@ Pagelet.extend({
   },
 
   /**
-   * List of active services that should be displayed in the UI.
+   * List of added services that should be displayed in the UI.
    *
    * @param {Fucntion} next Continuation callback.
    * @api public
    */
-  active: function active(next) {
+  added: function added(next) {
     throw new Error([
-      'You, as a developer need to implement the `.active` method of the service',
+      'You, as a developer need to implement the `.added` method of the service',
       'select pagelet. If you dont know how to do this, see the documenation',
       'about Pagelet.extend({});'
     ].join(' '));
@@ -126,14 +126,14 @@ Pagelet.extend({
 
     async.parallel({
       services: this.services.bind(this),
-      active: this.active.bind(this)
+      added: this.added.bind(this)
     }, function completed(err, data) {
       if (err) return done(err);
 
       data.services = data.services || [];
-      data.active = data.active || [];
+      data.added = data.added || [];
 
-      ['services', 'active'].forEach(function transform(key) {
+      ['services', 'added'].forEach(function transform(key) {
         if (Array.isArray(data[key])) return;
 
         data[key] = Object.keys(data[key]).map(function map(name) {
